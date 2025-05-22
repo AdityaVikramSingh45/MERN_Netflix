@@ -15,7 +15,7 @@ const AuthScreen = ()=>{
         navigate("/signup?email=" + email);
     }
     return(
-        <div className="hero-bg relative">
+        <div className="hero-bg relative bg-black">
             {/* Navbar */}
             <header className="max-w-6xl mx-auto flex items-center justify-between p-4 pb-10">
             <img src = {NetflixLogo} alt="logo" className="md:w-52 w-32"/>
