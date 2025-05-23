@@ -5,7 +5,6 @@ const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 // 🔌 Axios = the cable that connects your frontend and backend to exchange data.
 // 🔐 CORS = the security guard that checks if the connection is allowed
-console.log("base Url", baseURL)
 
 export const useAuthStore = create((set) => ({
     user: null,

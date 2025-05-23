@@ -8,9 +8,15 @@ exports.getTrendingMovie = async(req, res)=>{
     try{
         // const data = await fetchFromIMDB("https://imdb236.p.rapidapi.com/imdb/most-popular-movies");
         //  const data = await fetchFromDb("https://moviesverse1.p.rapidapi.com/top-box-office-movies")
-        const data = await fetchFromIMDB("https://imdb236.p.rapidapi.com/api/imdb/most-popular-movies")
+        const data = await fetchFromIMDB("https://imdb236.p.rapidapi.com/api/imdb/most-popular-movies");
+        console.log("data---->", data)
+
+        if (!Array.isArray(data) || data.length === 0) {
+            throw new Error("Fetched data is not a valid array or it's empty");
+          }
+
         const randomMovie = data[Math.floor(Math.random() * data?.length)];
-        console.log("randomMovie", randomMovie);
+        // console.log("randomMovie", randomMovie);
 
         res.status(200).json({
             success: true,
@@ -59,6 +65,11 @@ exports.getSimilarMovie = async(req, res)=>{
         const response1 = await fetchFromIMDB("https://imdb236.p.rapidapi.com/api/imdb/most-popular-movies");
         const response2 = await fetchFromIMDB("https://imdb236.p.rapidapi.com/api/imdb/top-rated-english-movies");
         const response3 = await fetchFromIMDB("https://imdb236.p.rapidapi.com/api/imdb/lowest-rated-movies");
+
+        if (!Array.isArray(response1) || !Array.isArray(response2) || !Array.isArray(response3)) {
+            throw new Error("One of the responses is not a valid array");
+          }
+      
         const data = [...response1, ...response2, ...response3];
         // console.log("data---->>>>", data[0])
         // const randomMovie = data[Math.floor(Math.random() * data?.length)];
