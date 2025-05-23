@@ -19,7 +19,11 @@ dbConnect();
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:5173",
+  origin: [
+    "http://localhost:5173", // dev
+    "http://localhost:5000", // production built frontend (Vite preview or Express serving dist)
+    "https://mern-netflix-aawq.onrender.com", // your deployed domain (if needed)
+  ],
     credentials: true
   }));
 
