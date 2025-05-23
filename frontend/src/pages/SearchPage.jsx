@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Link } from "react-router-dom";
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const shimmerArray = new Array(8).fill(0);
 
@@ -24,7 +25,7 @@ const SearchPage = () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/v1/search/${activeTab}/${searchTerm}`,
+        `${baseURL}/api/v1/search/${activeTab}/${searchTerm}`,
         { withCredentials: true }
       );
       setResults(res.data.content);

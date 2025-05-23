@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { Trash } from "lucide-react";
 import toast from "react-hot-toast";
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 function formatDate(dateString) {
     // Create a Date object from the input date string
@@ -25,7 +26,7 @@ const HistoryPage = ()=>{
     useEffect(()=>{
         const getSearchHistory = async()=>{
             try{
-                const res = await axios.get("http://localhost:5000/api/v1/search/history", {withCredentials: true})
+                const res = await axios.get(`${baseURL}/api/v1/search/history`, {withCredentials: true})
                 setSearchHistory(res.data.content);
                 console.log("res.data.content", res.data.content)
             }

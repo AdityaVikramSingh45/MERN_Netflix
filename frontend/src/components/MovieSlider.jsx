@@ -20,7 +20,7 @@ const MovieSlider = ({ category }) => {
         const getContent = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:5000/api/v1/${contentType}/popular`,
+                    `${import.meta.env.VITE_API_BASE_URL}/api/v1/${contentType}/popular`,
                     { withCredentials: true }
                 );
                 setContent(res?.data?.popularContent);

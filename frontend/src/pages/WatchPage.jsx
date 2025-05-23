@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import React from "react";
 import ReactPlayer from "react-player";
 import MovieSlider from "../components/MovieSlider";
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 function formatReleaseDate(date) {
     return new Date(date).toLocaleDateString("en-US", {
@@ -26,7 +27,7 @@ const WatchPage = () => {
     useEffect(() => {
         const getTrailer = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/v1/${contentType}/trending`, {
+                const res = await axios.get(`${baseURL}/api/v1/${contentType}/trending`, {
                     withCredentials: true,
                 });
                 setTrailer(res?.data?.content?.trailer);
@@ -43,7 +44,7 @@ const WatchPage = () => {
     useEffect(() => {
         const getContentDetail = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/v1/${contentType}/trending`, {
+                const res = await axios.get(`${baseURL}/api/v1/${contentType}/trending`, {
                     withCredentials: true,
                 });
                 setContent(res?.data?.content);
