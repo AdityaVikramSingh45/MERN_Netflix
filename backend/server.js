@@ -8,9 +8,11 @@ const { protectRoute } = require("./middlwares/protectRoute");
 const cors = require("cors");
 const path = require("path");
 const dotenv = require("dotenv");
+
+// Load environment variables
 dotenv.config();
 
-const ENV_VARS = require("../backend/config/envVars");
+// DB & env config
 const dbConnect = require("./config/db");
 dbConnect();
 
@@ -21,27 +23,27 @@ app.use(cors({
   credentials: true
 }));
 
-
-app.use(express.json()); // to parse JSON request bodies
+app.use(express.json()); // Parse JSON request bodies
 app.use(cookieParser());
 
-// Serve static files from React frontend build folder
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
+// API routes
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/movie", protectRoute, movieRoute);
 app.use("/api/v1/tv", protectRoute, tvRoute);
 app.use("/api/v1/search", protectRoute, searchRoute);
 
-if (ENV_VARS.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+// Serve static frontend in production
+if (process.env.NODE_ENV === "production") {
+  const frontendPath = path.join(__dirname, "../frontend/dist");
+  app.use(express.static(frontendPath));
+
+  // Fallback for any route (like /watch/:id) to handle frontend routing
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+    res.sendFile(path.resolve(frontendPath, "index.html"));
   });
 }
 
 const PORT = process.env.PORT || 3001;
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
