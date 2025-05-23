@@ -40,7 +40,7 @@ const HistoryPage = ()=>{
 
     const handleDelete = async(entry)=>{
         try{
-            const res = await axios.delete(`${baseURL}//api/v1/search/history/${entry.id}`, {withCredentials: true});
+            const res = await axios.delete(`${baseURL}/api/v1/search/history/${entry.id}`, {withCredentials: true});
             setSearchHistory(searchHistory.filter((item) => item.id !== entry.id));
         }
         catch(error){
