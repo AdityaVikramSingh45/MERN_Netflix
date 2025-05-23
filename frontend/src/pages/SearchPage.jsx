@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const shimmerArray = new Array(8).fill(0);
+console.log("base Url", baseURL)
 
 const SearchPage = () => {
   const [activeTab, setActiveTab] = useState("movie");
